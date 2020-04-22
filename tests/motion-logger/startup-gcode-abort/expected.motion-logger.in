@@ -112,11 +112,13 @@ FREE
 # Interpreter, enqueueing Canon commands on interp_list.
 #
 
-SET_TERM_COND termCond=2, tolerance=0.000000
+# not always printed on heavily loaded buildbot:
+#SET_TERM_COND termCond=2, tolerance=0.000000
 
 # This is the [RS274NGC]RS274NGC_STARTUP_CODE, up to but not going past
 # the very long dwell
-SET_LINE x=-1.000000, y=-2.000000, z=-3.000000, a=0.000000, b=0.000000, c=0.000000, u=0.000000, v=0.000000, w=0.000000, id=2, motion_type=1, vel=4.988877, ini_maxvel=4.988877, acc=1247.219129, turn=-1
+# not always printed on heavily loaded buildbot:
+#SET_LINE x=-1.000000, y=-2.000000, z=-3.000000, a=0.000000, b=0.000000, c=0.000000, u=0.000000, v=0.000000, w=0.000000, id=2, motion_type=1, vel=4.988877, ini_maxvel=4.988877, acc=1247.219129, turn=-1
 
 #
 # Task has fully booted!  It's now in Estop, in Manual, and ready to

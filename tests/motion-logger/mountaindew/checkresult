@@ -1,3 +1,6 @@
 #!/bin/sh
 cd $(dirname $1)
+echo "loadavg: $(cat /proc/loadavg)"
+echo "swaps:   $(cat /proc/swaps)"
+
 diff -u expected.motion-logger out.motion-logger

@@ -1,4 +1,8 @@
 #!/bin/sh
+cd $(dirname $1)
+echo "loadavg: $(cat /proc/loadavg)"
+echo "swaps:   $(cat /proc/swaps)"
+
 # Success or failure of this test is handled in the test.sh script, if we
 # get this far it's a success.
 exit 0

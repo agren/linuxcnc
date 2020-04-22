@@ -1,2 +1,6 @@
 #!/bin/sh
+cd $(dirname $1)
+echo "loadavg: $(cat /proc/loadavg)"
+echo "swaps:   $(cat /proc/swaps)"
+
 exit 0 # test failure is indicated by test.sh exit value

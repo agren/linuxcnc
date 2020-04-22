@@ -97,9 +97,19 @@ def verify_io_pins(state, tool_number, tool_prep_number, tool_prep_pocket):
 
 def verify_status_buffer(state, tool_in_spindle):
     s.poll()
-    if s.tool_in_spindle != tool_in_spindle:
-        print "state=%s, expected status.tool_in_spindle=%d, got %d" % (state, tool_in_spindle, s.tool_in_spindle)
-        sys.exit(1)
+
+    # wait for userspace delays on heavily loaded buildbot
+    ct=0;wait=0.1
+    while ct < 100:
+        if s.tool_in_spindle != tool_in_spindle:
+            print "___verify_status_buffer waiting for tool_in_spindle"
+            time.sleep(wait) # was: time.sleep(0.01)
+        else:
+            break
+        ct +=1
+        s.poll()
+    print "waited=%.3f state=%s, expected status.tool_in_spindle=%d, got %d" % (ct*wait, state, tool_in_spindle, s.tool_in_spindle)
+    if s.tool_in_spindle != tool_in_spindle: sys.exit(1)
 
     print "state='%s', got expected status buffer fields:" % state
     print "    tool_in_spindle=%d" % tool_in_spindle

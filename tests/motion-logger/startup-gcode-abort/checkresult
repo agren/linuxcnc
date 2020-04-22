@@ -1,3 +1,14 @@
 #!/bin/sh
 cd $(dirname $1)
-diff -u expected.motion-logger out.motion-logger
+echo "loadavg: $(cat /proc/loadavg)"
+echo "swaps:   $(cat /proc/swaps)"
+
+IGNORES=SET_LINE\|SET_TERM
+#log for buildbot investigations of these items:
+echo "found ignored items:"
+grep -E $IGNORES out.motion-logger
+echo ""
+
+# exclude lines that may be delayed on heavily loaded machine:
+cat out.motion-logger|grep -Ev $IGNORES >out.motion-logger.tst
+diff -u expected.motion-logger out.motion-logger.tst
